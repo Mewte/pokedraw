@@ -19,7 +19,7 @@ $(document).ready(function(){
     var colorLink = $(this).parent().css('background-color');
     $(this).attr({
       'data-color': colorLink,
-      href: '#canvas' 
+      href: '#canvas'
     })
   });
 
@@ -34,7 +34,7 @@ $(document).ready(function(){
   $('input[type=range]').change(changeColor);
 
   //Darkens/lightens the given color by the given percent.
-  function shadeColor(color, percent) {   
+  function shadeColor(color, percent) {
       var f=parseInt(color.slice(1),16),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=f>>16,G=f>>8&0x00FF,B=f&0x0000FF;
       return "#"+(0x1000000+(Math.round((t-R)*p)+R)*0x10000+(Math.round((t-G)*p)+G)*0x100+(Math.round((t-B)*p)+B)).toString(16).slice(1);
   }
@@ -68,7 +68,7 @@ $(document).ready(function(){
     $newColor.css('background-color', colorVal );
     $newColorLink.attr({
       'data-color': colorVal,
-      href: '#canvas' 
+      href: '#canvas'
     });
     $('.controls ul').append($newColor);
     $newColorLink.click();
@@ -129,28 +129,28 @@ $(document).ready(function(){
       var dataURL = canvas.toDataURL('image/jpeg');
       $.ajax({
         type: "POST",
-        url: "php/saveImage.php",
-        data: { 
+        url: "/ajax/saveImage",
+        data: {
            imgBase64: dataURL
         }
       }).done(function(o) {
-        console.log('Image saved. Refreshing header.'); 
+        console.log('Image saved. Refreshing header.');
         getRecentDrawings();
-        // If you want the file to be visible in the browser 
+        // If you want the file to be visible in the browser
         // - please modify the callback in javascript. All you
-        // need is to return the url to the file, you just saved 
+        // need is to return the url to the file, you just saved
         // and than put the image in your browser.
       });
       canSave = false;
       setTimeout(function() {
         canSave = true;
       }, 40000);
-    }    
+    }
   }
 
   //Timer function initiated when #newRound is clicked.
   function startTimer() {
-    var timer = setInterval(function() { 
+    var timer = setInterval(function() {
       //If in mq-mobile resolution, don't show the regular timer.
       if ($('#pip').css('display') !== 'block') {
         $('#timer').css('display','block');
@@ -172,7 +172,7 @@ $(document).ready(function(){
           roundComplete();
           saveImage(); //Calls getRecentDrawings() in callback.
         }
-      } 
+      }
     }, 1000);
   }
   //Current pokemon is kept track of just so that you don't get the same one twice in a row.
@@ -188,7 +188,7 @@ $(document).ready(function(){
     var rand = (Math.floor(Math.random() * 150)+1);
     while (recentPokemon.indexOf(rand) !== -1) {
       rand = (Math.floor(Math.random() * 150)+1);
-    }  
+    }
     recentPokemon.push(rand);
     var s = "00" + rand;
     var index =  s.substr(s.length-3);
@@ -260,7 +260,7 @@ $(document).ready(function(){
   });
 
   $('#share').click(function(){
-    //Open a modal with the link to share with friends. 
+    //Open a modal with the link to share with friends.
     //The link should end with the filename of the image that was just drawn.
 
   });
@@ -268,12 +268,13 @@ $(document).ready(function(){
   function getRecentDrawings() {
     var imgList = [];
     $.ajax({
-      type: "POST",
-      url: "php/getDrawingFilenames.php"
+      type: "GET",
+      url: "/ajax/getDrawingFilenames"
     }).done(function(files) {
-        console.log(files);
-        imgList = JSON.parse(files).slice(0, 12);
-        updateShareLink(imgList[0]);
+		console.log(files);
+        imgList = files; //no JSON.Parse needed since we set the JSON headers with express :-)
+        updateShareLink(imgList[0]._id); //Todo: The save feature should return an image ID, not this.
+		//
         //On success, send imgList to another function which updates the jQuery header with the images.
         updateHeaderDrawings(imgList);
     });
@@ -286,7 +287,7 @@ $(document).ready(function(){
     console.log(images);
     $('header .recentDrawing').fadeOut('fast').remove();
     images.forEach(function(val, i) {
-      $("header").append($("<img class='recentDrawing' src=drawings/" + val + "></img>").fadeIn('fast'));
+      $("header").append($("<img class='recentDrawing' src=drawings/" + val._id + "></img>").fadeIn('fast'));
     })
   }
   console.log('getting recent drawings...');
@@ -294,7 +295,7 @@ $(document).ready(function(){
 
 
     (function() {
-      
+
       var fbShare = function() {
           FB.ui({
               method: "feed",
@@ -316,5 +317,5 @@ $(document).ready(function(){
   function getActions () {
     console.log($canvas.sketch().actions);
   }
-    
+
 })
