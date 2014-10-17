@@ -4,10 +4,10 @@ var loadStart = 0;
 
 function initializeGallery() {
   $.ajax({
-    type: "POST",
-    url: "php/getDrawingFilenames.php"
+    type: "GET",
+    url: "/ajax/getDrawingFilenames" //todo: add limit parameter (ajax/getDrawingFilenames/1000)
   }).done(function(files) {
-      imgList = JSON.parse(files).slice(0, 1000);
+      imgList = files;
       displayNewDrawings();
   });
 }
@@ -15,7 +15,7 @@ function initializeGallery() {
 function displayNewDrawings() {
   loadPortion = imgList.slice(loadStart, loadStart+40);
   loadPortion.forEach(function(val) {
-    $(".gallery").append($("<div class='drawing'><img src=drawings/" + val + "></img></div>"));
+    $(".gallery").append($("<div class='drawing'><img src=drawings/" + val._id + "></img></div>"));
   });
   $("#loader-button-container").append($('<button class="loader">Load more Pokedraws!</button>'));
   $('.loader').on('click', function(){

@@ -116,7 +116,7 @@ function saveImage() {
     var dataURL = canvas.toDataURL('image/jpeg');
     $.ajax({
       type: "POST",
-      url: "php/kidsSaveImage.php",
+      url: "/ajax/saveImage", //just save to same location as others for now
       data: { 
          imgBase64: dataURL
       }
