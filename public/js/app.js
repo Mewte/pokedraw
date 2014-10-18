@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var color = $('.selected').css('background-color');
-
+  var recentDrawingID;
   //Construction of the Pokedex
   var pokedex = {};
   var pokeList = "Bulbasaur Ivysaur Venusaur Charmander Charmeleon Charizard Squirtle Wartortle Blastoise Caterpie Metapod Butterfree Weedle Kakuna Beedrill Pidgey Pidgeotto Pidgeot Rattata Raticate Spearow Fearow Ekans Arbok Pikachu Raichu Sandshrew Sandslash Nidoran♀ Nidorina Nidoqueen Nidoran♂ Nidorino Nidoking Clefairy Clefable Vulpix Ninetales Jigglypuff Wigglytuff Zubat Golbat Oddish Gloom Vileplume Paras Parasect Venonat Venomoth Diglett Dugtrio Meowth Persian Psyduck Golduck Mankey Primeape Growlithe Arcanine Poliwag Poliwhirl Poliwrath Abra Kadabra Alakazam Machop Machoke Machamp Bellsprout Weepinbell Victreebel Tentacool Tentacruel Geodude Graveler Golem Ponyta Rapidash Slowpoke Slowbro Magnemite Magneton Farfetchd Doduo Dodrio Seel Dewgong Grimer Muk Shellder Cloyster Gastly Haunter Gengar Onix Drowzee Hypno Krabby Kingler Voltorb Electrode Exeggcute Exeggutor Cubone Marowak Hitmonlee Hitmonchan Lickitung Koffing Weezing Rhyhorn Rhydon Chansey Tangela Kangaskhan Horsea Seadra Goldeen Seaking Staryu Starmie Mr.Mime Scyther Jynx Electabuzz Magmar Pinsir Tauros Magikarp Gyarados Lapras Ditto Eevee Vaporeon Jolteon Flareon Porygon Omanyte Omastar Kabuto Kabutops Aerodactyl Snorlax Articuno Zapdos Moltres Dratini Dragonair Dragonite Mewtwo";
@@ -131,10 +131,13 @@ $(document).ready(function(){
         type: "POST",
         url: "/ajax/saveImage",
         data: {
-           imgBase64: dataURL
+           imgBase64: dataURL,
+		   pokemon: currentPokemon
         }
-      }).done(function(o) {
-        console.log('Image saved. Refreshing header.');
+      }).done(function(response) {
+        recentDrawingID = response._id;
+		updateShareLink(recentDrawingID); //Todo: The save feature should return an image ID, not this.
+		$("#save").attr("href", "/drawings/"+recentDrawingID);
         getRecentDrawings();
         // If you want the file to be visible in the browser
         // - please modify the callback in javascript. All you
@@ -197,7 +200,8 @@ $(document).ready(function(){
     $('#pip img').attr('src', "img/" + index + ".png")
                  .load(startTimer()); //Start the timer once the image is fully loaded.
     //Fetched the proper name from the pokedex object.
-    $('#pokemonName').text(pokedex[rand]);
+	currentPokemon = pokedex[rand];
+    $('#pokemonName').text(currentPokemon);
   }
 
   function setActiveInterface() {
@@ -269,11 +273,10 @@ $(document).ready(function(){
     var imgList = [];
     $.ajax({
       type: "GET",
-      url: "/ajax/getDrawingFilenames"
+      url: "/ajax/getDrawingFilenames/12"
     }).done(function(files) {
 		console.log(files);
         imgList = files; //no JSON.Parse needed since we set the JSON headers with express :-)
-        updateShareLink(imgList[0]._id); //Todo: The save feature should return an image ID, not this.
 		//
         //On success, send imgList to another function which updates the jQuery header with the images.
         updateHeaderDrawings(imgList);
@@ -281,7 +284,7 @@ $(document).ready(function(){
   }
   var sharePic;
   function updateShareLink(fileURL) {
-    sharePic = ("http://www.pokedraw.net/drawings/" + fileURL);
+    sharePic = ("http://beta.pokedraw.net/drawings/" + fileURL);
   }
   function updateHeaderDrawings(images) {
     console.log(images);
@@ -306,7 +309,7 @@ $(document).ready(function(){
           });
       };
       $("#share").click(function() {
-          FB.login(function(response) {
+		  FB.login(function(response) {
               if (response.authResponse) {
                   fbShare();
              }

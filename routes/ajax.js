@@ -3,21 +3,28 @@ var router = express.Router();
 var moment = require('moment');
 
 /* GET home page. */
-router.post('/saveImage', function(req, res) {
+router.post('/saveImage', function(req, res,next) {
 	var collection = req.db.get('images');
 	var image = {
 		base_64: req.body.imgBase64.replace("data:image/jpeg;base64,", "").replace(" ", "+"),
 		created: moment().format(), //current time
-		pokemon: ""
+		pokemon: req.body.pokemon.toLowerCase()
 	};
-	collection.insert(image, function(err, records){
-		res.send(err);
+	collection.insert(image, function(err, record){
+		if (err){
+			next(err);
+		}
+		else{
+			console.log(record.pokemon);
+			res.contentType('application/json');
+			res.send(JSON.stringify({_id: record._id}));
+		}
 	});
 });
-router.get('/getDrawingFilenames', function(req, res) {
+router.get('/getDrawingFilenames/:limit', function(req, res) {
 	var collection = req.db.get('images');
 	var options = {
-		limit: 12,
+		limit: req.param('limit'),
 		sort: [['created','desc']],
 		fields: {_id: 1, created: 1, pokemon: 1}
 	};

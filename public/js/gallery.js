@@ -5,7 +5,7 @@ var loadStart = 0;
 function initializeGallery() {
   $.ajax({
     type: "GET",
-    url: "/ajax/getDrawingFilenames" //todo: add limit parameter (ajax/getDrawingFilenames/1000)
+    url: "/ajax/getDrawingFilenames/1000"
   }).done(function(files) {
       imgList = files;
       displayNewDrawings();
