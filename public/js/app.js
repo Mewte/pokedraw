@@ -287,7 +287,7 @@ $('#hide-drawings').on('click', function() {
   }
   var sharePic;
   function updateShareLink(fileURL) {
-    sharePic = ("http://beta.pokedraw.net/drawings/" + fileURL);
+    sharePic = ("http://"+document.domain+ "/drawings/" + fileURL);
   }
   function updateHeaderDrawings(images) {
     console.log(images);
