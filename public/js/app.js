@@ -12,7 +12,10 @@ $(document).ready(function(){
   var recentPokemon = [],
       sec,
       rounds = 0;
-
+$('#hide-drawings').on('click', function() {
+	$('.recentDrawing').css('display', 'none');
+	return false;
+});
   //Adds an anchor tag to each color choice to make it work with sketch.js
   $('.controls ul li').append('<a></a>');
   $('.controls ul li a').each(function(){
