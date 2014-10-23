@@ -8,9 +8,16 @@ router.get('/:image_id', function(req, res) {
 			next(err);
 		}
 		else {
-			var img = new Buffer(record.base_64, 'base64');
-			res.contentType('image/jpeg');
-			res.send(img);
+			if (record != undefined)
+			{
+				var img = new Buffer(record.base_64, 'base64');
+				res.contentType('image/jpeg');
+				res.send(img);
+			}
+			else{
+				res.contentType('text/html');
+				res.send("That drawing is no longer available.");				
+			}
 		}
 	});
 });
