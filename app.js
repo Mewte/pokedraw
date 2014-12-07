@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //DB variables
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('127.0.0.1:27017/pokedraw'); 
+var db = monk('127.0.0.1:27017/pokedraw');
 
 var ajax = require('./routes/ajax');
 var drawings = require('./routes/drawings');
