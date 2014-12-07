@@ -1,6 +1,6 @@
 /***** MEDIA QUERIES ************/
 /***** COLORS ********************/
-/* line 69, painter.scss */
+/* line 68, painter.scss */
 * {
   box-sizing: border-box; }
 
@@ -10,25 +10,26 @@ html:after, body:after, .row:after, .columns:after, .container:after {
   display: table;
   clear: both; }
 
-/* line 75, painter.scss */
+/* line 74, painter.scss */
 body {
   margin: 0;
   background: #777;
   font-family: Helvetica,Arial,sans-serif; }
 
-/* line 80, painter.scss */
+/* line 79, painter.scss */
 .container {
   max-width: 1080px; }
 
 /************ HEADER *******************************/
-/* line 85, painter.scss */
+/* line 84, painter.scss */
 header {
   z-index: 1;
   position: relative;
   height: 140px;
   overflow: hidden;
   background: white;
-  box-shadow: 0px 3px 2px 0px #111; }
+  box-shadow: 0px 3px 2px 0px #111;
+  padding-right: 18px; }
   /* line 92, painter.scss */
   header .recentDrawing {
     max-height: 100%;
@@ -38,23 +39,29 @@ header {
     max-height: 100%;
     padding: 4px; }
   @media only screen and (max-width: 481px) {
-    /* line 85, painter.scss */
+    /* line 84, painter.scss */
     header {
       height: 90px; } }
-  /* line 103, painter.scss */
-  header #hide-drawings {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    text-decoration: none;
-    font-size: 20px;
-    color: black; }
-    /* line 110, painter.scss */
-    header #hide-drawings:active {
-      color: red; }
+
+/* line 104, painter.scss */
+.header-control {
+  position: absolute;
+  right: 5px;
+  text-decoration: none;
+  color: #000;
+  font-size: 20px; }
+
+/* line 111, painter.scss */
+.hide-drawings {
+  top: 5px; }
+
+/* line 114, painter.scss */
+.refresh-drawings {
+  bottom: 5px;
+  font-size: 12px; }
 
 /************ NAVIGATION ***************************/
-/* line 118, painter.scss */
+/* line 120, painter.scss */
 nav {
   margin: 0px 20px;
   z-index: 0;
@@ -62,7 +69,7 @@ nav {
   box-shadow: 0px 2px 2px 0px #111;
   position: absolute;
   text-align: center; }
-  /* line 125, painter.scss */
+  /* line 127, painter.scss */
   nav a {
     background: #EEDF8E;
     display: block;
@@ -74,30 +81,25 @@ nav {
     position: relative;
     font-family: 'Open Sans', sans-serif;
     border-top: 1px solid #666; }
-    /* line 136, painter.scss */
+    /* line 138, painter.scss */
     nav a:hover {
       background: #EBE2B5; }
-    @media only screen and (max-width: 1400px) {
-      /* line 125, painter.scss */
-      nav a {
-        font-size: 14px;
-        padding: 5px; } }
-  /* line 144, painter.scss */
+  /* line 142, painter.scss */
   nav div {
     background: white;
     border-top: 1px solid;
     padding: 5px; }
   @media only screen and (max-width: 481px) {
-    /* line 118, painter.scss */
+    /* line 120, painter.scss */
     nav {
       display: none; } }
   @media only screen and (max-width: 1110px) {
-    /* line 118, painter.scss */
+    /* line 120, painter.scss */
     nav {
       position: relative; } }
 
 /************ DONATION BAR *************************/
-/* line 158, painter.scss */
+/* line 156, painter.scss */
 #donationDropdown {
   display: none;
   padding: 20px;
@@ -106,38 +108,38 @@ nav {
   width: 70%;
   background-color: #4E8FD5;
   box-shadow: 0px 2px 2px 0px #111; }
-  /* line 166, painter.scss */
+  /* line 164, painter.scss */
   #donationDropdown p {
     color: #fff;
     text-shadow: 0 1px #666;
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     margin: 5px 0; }
-    /* line 172, painter.scss */
+    /* line 170, painter.scss */
     #donationDropdown p:nth-child(2) {
       font-size: .8em;
       width: 75%;
       margin: 5px auto; }
   @media only screen and (max-width: 1110px) {
-    /* line 158, painter.scss */
+    /* line 156, painter.scss */
     #donationDropdown {
       width: 50%; } }
   @media only screen and (max-width: 381px) {
-    /* line 158, painter.scss */
+    /* line 156, painter.scss */
     #donationDropdown {
       position: absolute;
       top: -9999px; } }
-  /* line 186, painter.scss */
+  /* line 184, painter.scss */
   #donationDropdown #donationButtons form {
     display: inline; }
-  /* line 189, painter.scss */
+  /* line 187, painter.scss */
   #donationDropdown #donationButtons a {
     font-family: 'Open Sans', sans-serif;
     color: #ddd;
     margin: 5px; }
 
 /************ HERO TEXT ****************************/
-/* line 199, painter.scss */
+/* line 197, painter.scss */
 h1 {
   font-family: 'Open Sans', sans-serif;
   color: white;
@@ -146,7 +148,7 @@ h1 {
   margin: 10px 0 0; }
 
 /************ LEFT COLUMN **************************/
-/* line 209, painter.scss */
+/* line 207, painter.scss */
 #imageContainer {
   max-width: 100%;
   width: 100%;
@@ -158,14 +160,14 @@ h1 {
   box-shadow: 0 2px 0 0 #222;
   text-align: center;
   font: 0/0 a; }
-  /* line 220, painter.scss */
+  /* line 218, painter.scss */
   #imageContainer:before {
     content: ' ';
     display: inline-block;
     vertical-align: middle;
     /* vertical alignment of the inline element */
     height: 100%; }
-  /* line 226, painter.scss */
+  /* line 224, painter.scss */
   #imageContainer img {
     display: inline-block;
     vertical-align: middle;
@@ -174,11 +176,11 @@ h1 {
     max-height: 100%;
     border-radius: 5px; }
   @media only screen and (max-width: 381px) {
-    /* line 209, painter.scss */
+    /* line 207, painter.scss */
     #imageContainer {
       display: none; } }
 
-/* line 238, painter.scss */
+/* line 236, painter.scss */
 #pokemonName {
   font-family: 'Open Sans', sans-serif;
   text-align: center;
@@ -188,27 +190,27 @@ h1 {
   text-shadow: 0 2px #333; }
 
 /************ CENTER COLUMN **************************/
-/* line 247, painter.scss */
+/* line 245, painter.scss */
 .center-column {
   padding-top: 30px;
   text-align: center; }
   @media only screen and (max-width: 381px) {
-    /* line 247, painter.scss */
+    /* line 245, painter.scss */
     .center-column {
       padding-top: 0; } }
 
-/* line 254, painter.scss */
+/* line 252, painter.scss */
 #timer {
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   font-size: 48px;
   display: none; }
   @media only screen and (max-width: 381px) {
-    /* line 254, painter.scss */
+    /* line 252, painter.scss */
     #timer {
       display: hidden; } }
 
-/* line 263, painter.scss */
+/* line 261, painter.scss */
 #newRound {
   position: relative;
   background: #78bc3f;
@@ -236,14 +238,14 @@ h1 {
   #newRound:disabled {
     opacity: 0.7; }
   @media only screen and (max-width: 900px) {
-    /* line 263, painter.scss */
+    /* line 261, painter.scss */
     #newRound {
       font-size: 24px;
       line-height: 24px;
       padding: 8px 10px; } }
 
-/* line 276, painter.scss */
-#share, #save {
+/* line 274, painter.scss */
+.share, #save {
   position: relative;
   background: #478e95;
   box-shadow: 0 4px 0 0 #095057;
@@ -262,29 +264,30 @@ h1 {
   font-size: 24px;
   line-height: 24px;
   padding: 10px 20px;
-  display: none; }
+  display: none;
+  text-decoration: none; }
   /* line 49, painter.scss */
-  #share:enabled:active, #save:enabled:active {
+  .share:enabled:active, #save:enabled:active {
     top: 4px;
     box-shadow: none; }
   /* line 53, painter.scss */
-  #share:disabled, #save:disabled {
+  .share:disabled, #save:disabled {
     opacity: 0.7; }
-
-/* line 285, painter.scss */
-#save {
-  text-decoration: none;
-  margin: 0 auto; }
-  /* line 288, painter.scss */
-  #save:active {
+  /* line 283, painter.scss */
+  .share:active, #save:active {
     top: 2px;
     box-shadow: none; }
 
+/* line 288, painter.scss */
+#save [class^="icon-"] {
+  font-size: 18px;
+  margin-right: 5px; }
+
 /************ RIGHT COLUMN **************************/
-/* line 295, painter.scss */
+/* line 294, painter.scss */
 #canvas-container {
   position: relative; }
-  /* line 297, painter.scss */
+  /* line 296, painter.scss */
   #canvas-container #canvas {
     max-width: 100%;
     width: 100%;
@@ -296,7 +299,7 @@ h1 {
     box-shadow: 0 2px 0 0 #222;
     pointer-events: none;
     cursor: url(../img/cursor.png), crosshair; }
-  /* line 310, painter.scss */
+  /* line 309, painter.scss */
   #canvas-container #pip {
     display: none;
     position: absolute;
@@ -306,15 +309,15 @@ h1 {
     left: 5px;
     border-radius: 5px; }
     @media only screen and (max-width: 381px) {
-      /* line 310, painter.scss */
+      /* line 309, painter.scss */
       #canvas-container #pip {
         display: block; } }
-    /* line 321, painter.scss */
+    /* line 320, painter.scss */
     #canvas-container #pip img {
       max-width: 100%;
       max-height: 100%;
       border-radius: 5px; }
-  /* line 327, painter.scss */
+  /* line 326, painter.scss */
   #canvas-container #pip-timer {
     display: none;
     position: absolute;
@@ -322,22 +325,22 @@ h1 {
     top: 5px;
     font-size: 36px; }
     @media only screen and (max-width: 381px) {
-      /* line 327, painter.scss */
+      /* line 326, painter.scss */
       #canvas-container #pip-timer {
         display: block; } }
 
-/* line 339, painter.scss */
+/* line 338, painter.scss */
 .controls {
   margin: 0 auto;
   border-radius: 5px; }
-  /* line 342, painter.scss */
+  /* line 341, painter.scss */
   .controls ul {
     list-style: none;
     float: left;
     padding: 0;
     width: 100%;
     text-align: center; }
-    /* line 348, painter.scss */
+    /* line 347, painter.scss */
     .controls ul li {
       display: inline-block;
       margin: 0 5px 5px;
@@ -354,11 +357,11 @@ h1 {
         top: 2px;
         box-shadow: none; }
       @media only screen and (max-width: 381px) {
-        /* line 348, painter.scss */
+        /* line 347, painter.scss */
         .controls ul li {
           width: 46px;
           height: 46px; } }
-      /* line 354, painter.scss */
+      /* line 353, painter.scss */
       .controls ul li a {
         display: block;
         height: 100%; }
@@ -408,11 +411,11 @@ h1 {
 .gray {
   background: #8e969b; }
 
-/* line 366, painter.scss */
+/* line 365, painter.scss */
 .black {
   background: #000; }
 
-/* line 370, painter.scss */
+/* line 369, painter.scss */
 #colorSelect {
   background: #fff;
   border-radius: 5px;
@@ -422,7 +425,7 @@ h1 {
   max-width: 100%;
   width: 300px;
   position: relative; }
-  /* line 379, painter.scss */
+  /* line 378, painter.scss */
   #colorSelect:after {
     bottom: 100%;
     left: 50%;
@@ -437,7 +440,7 @@ h1 {
     border-width: 12px;
     margin-left: -10px; }
 
-/* line 394, painter.scss */
+/* line 393, painter.scss */
 #addNewColor {
   position: relative;
   background: #946d9b;
@@ -465,14 +468,14 @@ h1 {
   #addNewColor:disabled {
     opacity: 0.7; }
 
-/* line 403, painter.scss */
+/* line 402, painter.scss */
 .sliders {
   padding-top: 4px; }
-  /* line 405, painter.scss */
+  /* line 404, painter.scss */
   .sliders p {
     margin: 8px 0;
     vertical-align: middle; }
-  /* line 409, painter.scss */
+  /* line 408, painter.scss */
   .sliders label {
     text-align: right;
     font-family: "Open Sans",sans-serif;
@@ -481,36 +484,36 @@ h1 {
     margin: 0 10px 0 10px;
     width: 20%;
     font-size: 16px; }
-  /* line 417, painter.scss */
+  /* line 416, painter.scss */
   .sliders input {
     position: relative;
     width: 60%;
     top: 4px; }
 
 /********** FOOTER **********************/
-/* line 428, painter.scss */
+/* line 427, painter.scss */
 footer {
   margin-top: 40px;
   background: #444;
   color: #eee;
   padding: 20px 0; }
-  /* line 433, painter.scss */
+  /* line 432, painter.scss */
   footer .footerLink {
     float: left;
     width: 100%; }
-  /* line 437, painter.scss */
+  /* line 436, painter.scss */
   footer #byline {
     float: right;
     width: 100%;
     text-align: right; }
-  /* line 442, painter.scss */
+  /* line 441, painter.scss */
   footer .fb-like-box {
     float: right; }
-  /* line 445, painter.scss */
+  /* line 444, painter.scss */
   footer a {
     text-decoration: none;
     font-weight: bold;
     color: #BD9E70; }
-    /* line 449, painter.scss */
+    /* line 448, painter.scss */
     footer a:hover {
       color: #E4C08A; }

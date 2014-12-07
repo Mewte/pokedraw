@@ -88,6 +88,7 @@ header {
 	overflow: hidden;
 	background: white;
 	box-shadow: 0px 3px 2px 0px #111;
+	padding-right: 18px;
 	.recentDrawing {
 		max-height: 100%;
 		float: right;
@@ -100,7 +101,20 @@ header {
 		height: 90px;
 	}
 }
-
+.header-control {
+	position: absolute;
+	right: 5px;
+	text-decoration: none;
+	color: #000;
+	font-size: 20px;
+}
+.hide-drawings {
+	top: 5px;
+}
+.refresh-drawings {
+	bottom: 5px;
+	font-size: 12px;
+}
 /************ NAVIGATION ***************************/
 
 nav {
@@ -257,7 +271,7 @@ h1 {
 		padding: 8px 10px; 
 	}
 }
-#share, #save {
+.share, #save, {
 	@include button(#478E95, #095057);
 	@include box-round;
 	margin: 10px auto;
@@ -265,14 +279,15 @@ h1 {
 	line-height: 24px;
 	padding: 10px 20px;
 	display: none;
-}
-#save {
 	text-decoration: none;
-	margin: 0 auto;
 	&:active {
 		top: 2px;
 		box-shadow: none;
 	}
+}
+#save [class^="icon-"] {
+	font-size: 18px;
+	margin-right: 5px;
 }
 
 /************ RIGHT COLUMN **************************/

@@ -4,6 +4,7 @@
 	<title>Pokedraw - Draw a Pokemon in 45 seconds!</title>
 	<link rel="stylesheet" href="/css/smart-grid.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link rel="stylesheet" href="/css/painter.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/css/icons.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui">
@@ -58,7 +59,8 @@
 
 	<header class="row">
 		<a href="/"><img id="logo" src="img/logo.png"/></a>
-		<a id="hide-drawings" href="#" title="Hide these drawings">&times;</a>
+		<a class="header-control refresh-drawings" href="#" title="Refresh recent drawings"><span class="icon-spinner"></span></a>
+		<a class="header-control hide-drawings" href="#" title="Hide these drawings">&times;</a>
 	</header>
 	<nav>
 		<a href="gallery.html"><span>Gallery</span></a>
@@ -93,8 +95,9 @@
 			<div class="center-column columns two">
 				<button id="newRound">Let's Draw!</button>
 				<span id="timer">45</span>
-				<button id="share">Share</button>
-				<a href="#canvas" id="save" data-download="jpeg">Save</a>
+				<button class="share share-fb"><span class="icon-facebook"></span></button>
+				<a class="share share-twitter popup" href="http://twitter.com/share?url=http%3A%2F%2Fpokedraw.net" data-dnt="true"><span class="icon-twitter"></span></a>
+				<a href="#canvas" id="save" data-download="jpeg" target="_blank"><span class="icon-disk"></span>Save</a>
 			</div>
 			<div class="right-column columns five ">
 				<div id="canvas-container">
@@ -133,14 +136,15 @@
 					<form id="dropdownDonateButton" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
 						<input type="hidden" name="cmd" value="_s-xclick">
 						<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
-						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" style="vertical-align: middle;">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"><span>if you're having a great time!</span>
 					</form>
-					<p><strong>6,500,000</strong> Pokedraws and counting!</p>
+					<p><strong>10,000,000</strong> Pokedraws and counting!</p>
+					<p>Pokémon and all respective names are Trademark & © of Nintendo 1996-2014</p>
 				</div>
 				<div class="columns four">
 					<div class="fb-like-box" data-href="https://www.facebook.com/pokedrawdotnet" data-width="150px" data-colorscheme="dark" data-show-faces="false" data-header="false" data-stream="false" data-show-border="false"></div>
-					<div id="byline">Made by <a href="http://www.jamestw.net">James TW</a></div>
+					<div id="byline">Made by <a href="http://jamestw.net">James TW</a></div>
 				</div>
 			</div>
 		</div>
