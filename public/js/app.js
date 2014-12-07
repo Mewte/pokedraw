@@ -227,11 +227,11 @@ $(document).ready(function(){
 	function setInactiveInterface() {
 		//As soon as the round is over, change the CTA button to say "Draw a new Pokemon" and change the button css to match.
 		$('#newRound').attr('disabled', false)
-									.text('Draw a new Pokémon!')
-									.css({
-									 'font-size': '24px',
-									 'padding': '5px'
-									});
+						.text('Draw a new Pokémon!')
+						.css({
+						 'font-size': '24px',
+						 'padding': '5px'
+						});
 		$canvas.css('pointer-events', 'none');
 		$('.share').css('display', 'inline-block').fadeIn('fast');
 		$('#save').css('display', 'inline-block').fadeIn('fast');
@@ -279,7 +279,6 @@ $(document).ready(function(){
 		}).done(function(files) {
 		console.log(files);
 				imgList = files; //no JSON.Parse needed since we set the JSON headers with express :-)
-		//
 				//On success, send imgList to another function which updates the jQuery header with the images.
 				updateHeaderDrawings(imgList);
 				$("recentDrawing").error(function(){$(this).hide();});
@@ -289,7 +288,7 @@ $(document).ready(function(){
 	function updateShareLink(fileURL) {
 		sharePic = ("http://"+document.domain+ "/drawings/" + fileURL);
 		//Update Tweet button URL
-		$('.twitter').attr('href', 'http://twitter.com/share?url=' + sharePic + '&text=I drew this ' + currentPokemon + ' all by myself on pokedraw.net!');
+		$('.share-twitter').attr('href', 'http://twitter.com/share?url=' + sharePic + '&text=I drew this ' + currentPokemon + ' all by myself on pokedraw.net!');
 	}
 	function updateHeaderDrawings(images) {
 		console.log(images);
@@ -327,18 +326,13 @@ $(document).ready(function(){
 	}
 
 	//Twitter Share button
-	var tweetURL = ("http://pokedraw.net/drawings/54848b95f6cec28e19199a92");
-	console.log(tweetURL);
-	//$('.twitter').attr('href', 'http://twitter.com/share?url=' + tweetURL);
-	// worked previously $('.twitter').attr('href', 'http://twitter.com/share?url=http%3A%2F%2Fpokedraw.net%2Fdrawings%2F54848a21f6cec28e1919995b');
-
+	
 	$('.popup').click(function(event) {
     var width  = 575,
         height = 400,
         left   = ($(window).width()  - width)  / 2,
         top    = ($(window).height() - height) / 2,
         url    = this.href,
-        //text   = "!!!!!!!!!!!!!!",
         opts   = 'status=1' +
                  ',width='  + width  +
                  ',height=' + height +
